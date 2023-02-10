@@ -1,0 +1,15 @@
+mutation AddStar($repositoryId: ID!){
+    addStar(input: {starrableId: $repositoryId}) {
+        starrable {
+            viewerHasStarred
+        }
+    }
+}
+
+mutation RemoveStar($repositoryId: ID!){
+    removeStar(input: {starrableId: $repositoryId}) {
+        starrable {
+            viewerHasStarred
+        }
+    }
+}

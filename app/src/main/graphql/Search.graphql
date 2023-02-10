@@ -1,0 +1,25 @@
+query SearchRepositories($query: String!, $number_of_repos: Int!, $cursor: String) {
+    search(query: $query, type: REPOSITORY, first: $number_of_repos, after: $cursor) {
+        repositoryCount
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
+        }
+        edges {
+            node {
+                ... on Repository {
+                    id
+                    name
+                    description
+                    owner {
+                        login
+                    }
+                    stargazerCount
+                    viewerHasStarred
+                }
+            }
+        }
+    }
+}

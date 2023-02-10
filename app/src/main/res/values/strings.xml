@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">github client</string>
+    <string name="search_text_box_label">Enjoy search repositories!</string>
+    <string name="search_empty_text">Search the Github Repository🕵️‍️✨</string>
+    <string name="search_empty_description">Star the repositories you like!</string>
+</resources>
