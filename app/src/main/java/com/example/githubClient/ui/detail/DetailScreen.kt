@@ -14,7 +14,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel()
 ) {
-    // ToDo: id元に取得したデータで詳細を実装する (このアイテムは消してOK)
     Box(
         modifier = Modifier
             .fillMaxSize()

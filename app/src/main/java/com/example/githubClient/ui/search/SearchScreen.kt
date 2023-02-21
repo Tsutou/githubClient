@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -54,11 +55,18 @@ fun SearchScreen(
                 SearchEmptyBox(modifier = Modifier.fillMaxSize().padding(16.dp))
             }
         } else {
-            searchUiState.searchItems?.items?.forEach { repositoryItem ->
-                item {
+            val searchResults = searchUiState.searchItems?.items
+
+            searchResults?.let {
+                items(
+                    items = searchResults,
+                    key = { repo ->
+                        repo.id + repo.owner
+                    }
+                ) { repo ->
                     SearchRepositoryItem(
                         modifier = Modifier.padding(8.dp).fillMaxWidth(),
-                        repositoryItem = repositoryItem,
+                        repositoryItem = repo,
                         onRepositoryItemClick = { item -> navigator.navigateToDetail(item.id) },
                         onToggleStar = { item -> viewModel.onToggleStar(item) }
                     )

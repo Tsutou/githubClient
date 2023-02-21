@@ -8,6 +8,7 @@ import com.example.githubClient.domain.model.RepositoryItem
 import com.example.githubClient.domain.model.plus
 import com.example.githubClient.domain.repository.StarRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -23,6 +24,8 @@ class SearchViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(SearchUiState.EMPTY)
     val uiState: StateFlow<SearchUiState> = _uiState
 
+    private var searchJob : Job? = null
+
     init {
         onLoadInitial()
     }
@@ -32,8 +35,9 @@ class SearchViewModel @Inject constructor(
             searchItems = null,
             userInput = value
         )
-        viewModelScope.launch {
-            delay(2000)
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            delay(500)
             onLoadInitial()
         }
     }
